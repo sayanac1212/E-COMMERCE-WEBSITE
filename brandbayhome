@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BrandBay - Home</title>
+    <link rel="stylesheet" href="brandhome.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">BrandBay</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <section class="categories">
+    <div class="container">
+        <h2>Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-item">
+                <img src="images/mobile-phones.jpg" alt="Mobile Phones">
+                <h3>Mobile Phones</h3>
+            </div>
+            <div class="category-item">
+                <img src="images/clothes.jpg" alt="Clothes">
+                <h3>Clothes</h3>
+            </div>
+            <div class="category-item">
+                <img src="images/home-appliances.jpg" alt="Home Appliances">
+                <h3>Home Appliances</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <div class="container">
+            <h2>Welcome to BrandBay</h2>
+            <p>Your one-stop destination for branding solutions.</p>
+            <a href="#" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BrandBay. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

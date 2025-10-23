@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Cart</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: lightblue;
+      padding: 2em;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+      font-size: 2em;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    li {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1em;
+    }
+
+    .item-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .qty-btn {
+      background: #2980b9;
+      color: white;
+      border: none;
+      padding: 4px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 1em;
+    }
+
+    .qty-btn:hover {
+      background: #1f5f8a;
+    }
+
+    .remove-btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 7px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 0.9em;
+    }
+
+    #total {
+      max-width: 600px;
+      margin: 20px auto;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-align: right;
+      color: #2c3e50;
+    }
+
+    .cart-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .cart-buttons button {
+      padding: 12px 25px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+
+    .clear-btn {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .continue-btn {
+      background-color: #27ae60;
+      color: white;
+    }
+
+    .checkout-btn {
+      background-color: #2980b9;
+      color: white;
+    }
+
+    .checkout-btn a {
+      text-decoration: none;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Cart</h1>
+  <ul id="cartItems"></ul>
+  <p id="total"></p>
+
+  <div class="cart-buttons">
+    <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
+    <button class="continue-btn" onclick="window.location.href='brandhome.html'">Continue Shopping</button>
+    <button class="checkout-btn"><a href="checkoutt.html">Checkout</a></button>
+  </div>
+
+  <script>
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let cartList = document.getElementById("cartItems");
+      cartList.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += item.price * (item.quantity || 1);
+
+        let li = document.createElement("li");
+        li.innerHTML = `
+          <span>${item.name} - ₹${item.price}</span>
+          <div class="item-controls">
+            <button class="qty-btn" onclick="changeQuantity(${index}, -1)">−</button>
+            <span>${item.quantity || 1}</span>
+            <button class="qty-btn" onclick="changeQuantity(${index}, 1)">+</button>
+            <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+          </div>
+        `;
+        cartList.appendChild(li);
+      });
+
+      document.getElementById("total").innerText = "Total: ₹" + total;
+    }
+
+    function changeQuantity(index, delta) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      if (!cart[index].quantity) cart[index].quantity = 1;
+      cart[index].quantity += delta;
+      if (cart[index].quantity < 1) cart[index].quantity = 1;
+      localStorage.setItem("cart", JSON.stringify(cart));
+      loadCart();
+    }
+
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      loadCart();
+    }
+
+    function clearCart() {
+      localStorage.removeItem("cart");
+      loadCart();
+    }
+
+    loadCart();
+  </script>
+</body>
+</html>
